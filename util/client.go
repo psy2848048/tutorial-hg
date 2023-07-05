@@ -1,6 +1,8 @@
 package util
 
 import (
+	"fmt"
+
 	hedera "github.com/hashgraph/hedera-sdk-go/v2"
 )
 
@@ -53,6 +55,9 @@ func (client *Client) CreateNewAccount(asset int64) (*hedera.AccountInfo, error)
 	if err != nil {
 		return nil, err
 	}
+
+	// FIXME: into logger
+	fmt.Println("Tx ID:", receipt.TransactionID)
 
 	accInfo, err := hedera.NewAccountInfoQuery().
 		SetAccountID(*receipt.AccountID).
